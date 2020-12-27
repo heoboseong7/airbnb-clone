@@ -8,7 +8,7 @@ class User(AbstractUser):
     """ Custom User Modes """
 
     # 데이터베이스에 bio column이 새로 생성되었을 때 기존의 row에 default값이 추가되어 들어감
-    # default를 사용하거나 NULL 값을 활성화 null=true
+    # default를 사용하거나 NULL 값을 활성화
     GENDER_MALE = "male"
     GENDER_FEMALE = "female"
     GENDER_OTHER = "other"
@@ -36,16 +36,12 @@ class User(AbstractUser):
         (CURRENCY_KRW, "KRW"),
     )
     # null은 DB의 허용 / blank는 form에서 공백을 허용하게 해줌
-    avatar = models.ImageField(null=True, blank=True)
+    avatar = models.ImageField(blank=True)
     # max_length 설정 필수 choices는 form에만 영향, DB에는 영향 없음
-    gender = models.CharField(choices=GENDER_CHOICES, max_length=10, null=True)
-    bio = models.TextField(default="")
-    birthdate = models.DateField(null=True)
-    language = models.CharField(
-        choices=LANGUAGE_CHOICES, max_length=2, null=True, blank=True
-    )
-    currency = models.CharField(
-        choices=CYURRENCY_CHOICES, max_length=3, null=True, blank=True
-    )
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
+    bio = models.TextField(blank=True)
+    birthdate = models.DateField(blank=True, null=True)
+    language = models.CharField(choices=LANGUAGE_CHOICES, max_length=2, blank=True)
+    currency = models.CharField(choices=CYURRENCY_CHOICES, max_length=3, blank=True)
 
     superhost = models.BooleanField(default=False)

@@ -8,16 +8,18 @@ class CustomUserAdmin(UserAdmin):
     """ Custom User Admin """
 
     fieldsets = UserAdmin.fieldsets + (
-        "Banana",
-        {
-            "fields": (
-                "avatar",
-                "gender",
-                "bio",
-                "birthdate",
-                "language",
-                "currency",
-                "superhost",
-            )
-        },
+        (
+            "Custom Profile",
+            {
+                "fields": (
+                    "avatar",
+                    "gender",
+                    "bio",
+                    "birthdate",
+                    "language",
+                    "currency",
+                    "superhost",
+                )
+            },
+        ),
     )
