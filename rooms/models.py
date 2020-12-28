@@ -19,13 +19,33 @@ class AbstractItem(core_models.TimeStampedModel):
 
 
 class RoomType(AbstractItem):
-    """ Room Type """
+    """ RoomType Object Definition """
+
+    pass
+
+
+class Amenity(AbstractItem):
+    """ Amenity Object Definition """
+
+    pass
+
+
+class Facility(AbstractItem):
+    """ Facility Model Definition """
+
+    pass
+
+
+class HouseRule(AbstractItem):
+    """ HouseRule Model Definition """
 
     pass
 
 
 class Room(core_models.TimeStampedModel):
     """ Room Model Definition """
+
+    pass
 
     name = models.CharField(max_length=140)
     description = models.TextField()
@@ -40,7 +60,11 @@ class Room(core_models.TimeStampedModel):
     check_out = models.TimeField()
     instant_book = models.BooleanField(default=False)
     host = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
-    room_type = models.ManyToManyField(RoomType, blank=True)
+    # cascade : 상위에서 발생한 사건이 모든 하위에 영향을 줌
+    room_type = models.ForeignKey(RoomType, on_delete=models.SET_NULL, null=True)
+    amenities = models.ManyToManyField(Amenity)
+    facilities = models.ManyToManyField(Facility)
+    house_rules = models.ManyToManyField(HouseRule)
 
     def __str__(self):
         return self.name
