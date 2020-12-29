@@ -57,14 +57,13 @@ class Photo(core_models.TimeStampedModel):
 class Room(core_models.TimeStampedModel):
     """ Room Model Definition """
 
-    pass
-
     name = models.CharField(max_length=140)
     description = models.TextField()
     country = CountryField()
     city = models.CharField(max_length=80)
     price = models.IntegerField()
     address = models.CharField(max_length=140)
+    guests = models.IntegerField(default=0)
     beds = models.IntegerField()
     bedrooms = models.IntegerField()
     baths = models.IntegerField()
