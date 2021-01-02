@@ -139,3 +139,5 @@ cython_debug/
 
 #Secret Key
 settings.py
+
+uploads/

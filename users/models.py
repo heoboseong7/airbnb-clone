@@ -36,7 +36,7 @@ class User(AbstractUser):
         (CURRENCY_KRW, "KRW"),
     )
     # null은 DB의 허용 / blank는 form에서 공백을 허용하게 해줌
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(upload_to="avatars", blank=True)
     # max_length 설정 필수 choices는 form에만 영향, DB에는 영향 없음
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
     bio = models.TextField(blank=True)
