@@ -83,6 +83,10 @@ class Room(core_models.TimeStampedModel):
     facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
     house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
 
+    def save(self, *args, **kwargs):
+        # 내가 필요한 내용
+        super(ModelName, self).save(*args, **kwargs)  # Call the real save() method
+
     def __str__(self):
         return self.name
 
