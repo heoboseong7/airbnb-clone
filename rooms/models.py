@@ -82,10 +82,10 @@ class Room(core_models.TimeStampedModel):
     amenities = models.ManyToManyField("Amenity", related_name="rooms", blank=True)
     facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
     house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
-
+    # admin에서만 아니라 model을 건드리는 모든 경우마다 실행
     def save(self, *args, **kwargs):
-        # 내가 필요한 내용
-        super(ModelName, self).save(*args, **kwargs)  # Call the real save() method
+        self.city = str.capitalize(self.city)
+        super(Room, self).save(*args, **kwargs)  # Call the real save() method
 
     def __str__(self):
         return self.name
