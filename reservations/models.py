@@ -13,7 +13,7 @@ class Reservation(core_models.TimeStampedModel):
     STATUS_CHOICES = (
         (STATUS_PENDING, "Pending"),
         (STATUS_CONFIRMED, "Confirmed"),
-        (STATUS_PENDING, "Canceled"),
+        (STATUS_CANCELED, "Canceled"),
     )
 
     status = models.CharField(
@@ -29,7 +29,7 @@ class Reservation(core_models.TimeStampedModel):
 
     def in_progress(self):
         now = timezone.now().date()
-        return now > self.check_in and now < self.check_out
+        return now >= self.check_in and now <= self.check_out
 
     # O 또는 X로 보여줌
     in_progress.boolean = True
