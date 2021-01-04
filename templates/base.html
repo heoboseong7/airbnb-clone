@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{% block page_name %}{% endblock page_name%}</title>
 </head>
 <body>
-    &copy; nbnb
+<!-- 자식 탬플릿이 넣을 수 있는 공간 -->
+    {% include "partials/header.html" %}
+    {% block content %}{% endblock %}
+    {% include "partials/footer.html" %}
 </body>
 </html>
