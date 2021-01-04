@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from rooms import views as room_views
 
 # from . import setting X
 
 # urlpatterns는 항상 유지되어야 한다
 urlpatterns = [
+    path("", include("core.urls", namespace="core")),
     path("admin/", admin.site.urls),
 ]
 
