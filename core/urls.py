@@ -3,8 +3,5 @@ from rooms import views as room_views
 
 app_name = "core"
 
-#not optional
-urlpatterns += [
-    path("", room_views.all_rooms, name="home")),
-    path("login")
-]
+# not optional
+urlpatterns = [path("", room_views.all_rooms, name="home")]
