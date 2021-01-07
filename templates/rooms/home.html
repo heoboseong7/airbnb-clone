@@ -8,8 +8,15 @@
     {% for room in rooms %}
         <h1>{{room.name}} / ${{room.price}}</h1>
     {% endfor %}
-    <h5> Page {{page}} of {{page_count}} </h5>
-    {% for page in page_range %}
-        <a href="?page={{page}}">{{page}}</a>
-    {% endfor %}
+    <h5>
+    {% if page != 1 %}
+        <a href="?page={{page|add:-1}}">Previous</a>
+    {% endif %}
+    Page {{page}} of {{page_count}} 
+    <!-- django는 너무 많은 logic을 허용하지 않음
+    필요한 경우 filter를 사용--> 
+    {% if page != page_count %}
+        <a href="?page={{page|add:1}}">Next</a>
+    {% endif %}
+    </h5>
 {% endblock content %}
