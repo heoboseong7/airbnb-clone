@@ -5,18 +5,18 @@
 {% endblock page_name %}
 
 {% block content %}
-    {% for room in page.object_list %}
+    {% for room in object_list %}
         <h1>{{room.name}} / ${{room.price}}</h1>
     {% endfor %}
     <h5>
-    {% if page.has_previous %}
-        <a href="?page={{page.previous_page_number}}">Previous</a>
+    {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
     {% endif %}
-    Page {{page.number}} of {{page.paginator.num_pages}} 
+    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}} 
     <!-- django는 너무 많은 logic을 허용하지 않음
     필요한 경우 filter를 사용--> 
-    {% if page.has_next %}
-        <a href="?page={{page.next_page_number}}">Next</a>
+    {% if page_obj.has_next %}
+        <a href="?page={{page_obj.next_page_number}}">Next</a>
     {% endif %}
     </h5>
 {% endblock content %}
