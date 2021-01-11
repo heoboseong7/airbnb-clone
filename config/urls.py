@@ -24,6 +24,7 @@ from rooms import views as room_views
 # urlpatterns는 항상 유지되어야 한다
 urlpatterns = [
     path("", include("core.urls", namespace="core")),
+    path("rooms/", include("rooms.urls", namespace="rooms")),
     path("admin/", admin.site.urls),
 ]
 
