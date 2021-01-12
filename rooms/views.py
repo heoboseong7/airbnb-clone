@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.http import Http404
 from django.shortcuts import render
 from . import models
@@ -23,3 +23,10 @@ def room_detail(request, pk):
         raise Http404()
         # error는 raise로
         # 404에 대한 페이지를 만드려면 template에 해당하는 404.html을 생성
+
+
+class RoomDetail(DetailView):
+
+    """ RoomDetail Definition """
+
+    model = models.Room
