@@ -5,11 +5,12 @@ from . import forms
 
 class LoginView(View):
     def get(self, request):
-        form = forms.LoginForm(initial={"email": "itn@las.com"})
+        form = forms.LoginForm(initial={"email": "a@a.com"})
         return render(request, "users/login.html", {"form": form})
 
     def post(self, request):
         form = forms.LoginForm(request.POST)
-        form.is_valid()
+        if form.is_valid():
+            print(form.cleaned_data)
         # print(form)
         return render(request, "users/login.html", {"form": form})
