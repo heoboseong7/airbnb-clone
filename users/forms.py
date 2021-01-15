@@ -42,10 +42,10 @@ class SignUpForm(forms.ModelForm):
             return password
 
     def save(self, *args, **kwargs):
-        email = self.cleaned_data.get("email")
-        password = self.cleaned_data.get("password")
         # commit=False인 경우 저장은 하지만 DB에 반영하진 않음
         user = super().save(commit=False)
+        email = self.cleaned_data.get("email")
+        password = self.cleaned_data.get("password")
         user.username = email
         user.set_password(password)
         user.save()
