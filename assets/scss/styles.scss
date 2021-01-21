@@ -9,3 +9,10 @@
 .search-box{
     transition: box-shadow 0.2s linear;
 }
+
+.nav_link{
+    @apply ml-8 border-b-2 border-white hover:border-gray-600 h-full flex items-center;
+    a{
+        @apply py-8 px-5 text-gray-700;
+    }
+}
