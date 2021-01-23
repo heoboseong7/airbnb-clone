@@ -97,7 +97,7 @@ class Room(core_models.TimeStampedModel):
         if len(all_reviews) > 0:
             for reviews in all_reviews:
                 all_ratings += reviews.rating_average()
-            return all_ratings / len(all_reviews)
+            return round(all_ratings / len(all_reviews), 2)
         return 0
 
     # 어드민 패널의 view on site에 연결된 url을 리턴
