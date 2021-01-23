@@ -103,3 +103,8 @@ class Room(core_models.TimeStampedModel):
     # 어드민 패널의 view on site에 연결된 url을 리턴
     def get_absolute_url(self):
         return reverse("rooms:detail", kwargs={"pk": self.pk})
+
+    def first_photo(self):
+        # comma를 붙이면 해당 배열의 첫 번째 원소를 받음
+        (photo,) = self.photos.all()[:1]
+        return photo.file.url
