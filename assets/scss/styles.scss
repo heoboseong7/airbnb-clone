@@ -26,7 +26,18 @@ input{
 }
 
 form {
-    input {
+    .input {
         @apply mb-3;
+        &.has_error {
+            input {
+                @apply bg-red-200 border-gray-400;
+                &:focus {
+                    @apply border-red-200;
+                }
+            }
+        }
     }
+    
 }
+// .input.has_error -> input과 has_error가 class에 같이 있을 때 적용
+// .input .has_error -> input안에 has_error가 있는 경우 적용
