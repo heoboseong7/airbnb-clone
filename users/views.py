@@ -1,7 +1,7 @@
 import os
 import requests
 from django.views import View
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
@@ -219,3 +219,10 @@ def kakao_callback(request):
     except KakaoException as e:
         messages.error(request, e)
         return redirect(reverse("users:login"))
+
+
+class UserProfileView(DetailView):
+    model = models.User
+    context_object_name = "user_obj"
+    # context_object_name을 설정해주지 않으면 뷰에서 찾았던 유저로 기존의 유저를 대체할 수 있다.
+    # view를 작업할 때 유의할 부분
