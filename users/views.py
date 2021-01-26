@@ -226,3 +226,8 @@ class UserProfileView(DetailView):
     context_object_name = "user_obj"
     # context_object_name을 설정해주지 않으면 뷰에서 찾았던 유저로 기존의 유저를 대체할 수 있다.
     # view를 작업할 때 유의할 부분
+    # context data 확장
+    """ def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["hello"] = "Hello"
+        return context """
