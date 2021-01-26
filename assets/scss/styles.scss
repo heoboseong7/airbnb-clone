@@ -37,7 +37,42 @@ form {
             }
         }
     }
-    
 }
+
 // .input.has_error -> input과 has_error가 class에 같이 있을 때 적용
 // .input .has_error -> input안에 has_error가 있는 경우 적용
+
+@keyframes messageFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    5% {
+        opacity: 1;
+        transform: translateY(50px);
+    }
+    95% {
+        opacity: 1;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
+// forward를 적지 않으면 animation이 끝난 후 원래의 값으로 돌아감
+.message {
+    animation: messageFadeIn 5s ease-in-out forwards;
+    &.error {
+        @apply bg-red-600;
+    }
+    &.info {
+        @apply bg-blue-500;
+    }
+    &.success {
+        @apply bg-green-500;
+    }
+    &.warning {
+        @apply bg-yellow-400;
+    }
+}
