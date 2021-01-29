@@ -8,10 +8,11 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.core.files.base import ContentFile
 from django.contrib import messages
-from . import forms, models
+from django.contrib.messages.views import SuccessMessageMixin
+from . import forms, models, mixins
 
 
-class LoginView(FormView):
+class LoginView(mixins.LoggedOutOnlyView, FormView):
 
     template_name = "users/login.html"
     form_class = forms.LoginForm
@@ -50,7 +51,7 @@ def log_out(request):
     return redirect(reverse("core:home"))
 
 
-class SignUpView(FormView):
+class SignUpView(mixins.LoggedOutOnlyView, FormView):
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
     success_url = reverse_lazy("core:home")
@@ -234,7 +235,7 @@ class UserProfileView(DetailView):
         return context """
 
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(SuccessMessageMixin, UpdateView):
     # update profile 이후 get_abosolute_url로 redirect
     model = models.User
     template_name = "users/update-profile.html"
@@ -248,6 +249,7 @@ class UpdateProfileView(UpdateView):
         "language",
         "currency",
     )
+    success_message = "Profile Updated"
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -258,7 +260,7 @@ class UpdateProfileView(UpdateView):
         form.fields["birthdate"].widget.attrs = {"placeholder": "Birthdate"}
         form.fields["first_name"].widget.attrs = {"placeholder": "First Name"}
         form.fields["last_name"].widget.attrs = {"placeholder": "Last Name"}
-        form.fields["gender"].widget.attrs = {"placeholder": "Gender"}
+        # form.fields["gender"].widget.attrs = {"placeholder": "Gender"}
         form.fields["bio"].widget.attrs = {"placeholder": "Bio"}
         form.fields["language"].widget.attrs = {"placeholder": "Language"}
         form.fields["currency"].widget.attrs = {"placeholder": "Currency"}
@@ -271,9 +273,10 @@ class UpdateProfileView(UpdateView):
         return super().form_valid(form) """
 
 
-class UpdatePasswordView(PasswordChangeView):
+class UpdatePasswordView(SuccessMessageMixin, PasswordChangeView):
 
     template_name = "users/update-password.html"
+    # 변경 성공 시 이동되는 url default : reverse_lazy('password_change_done')
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class=form_class)
@@ -283,3 +286,8 @@ class UpdatePasswordView(PasswordChangeView):
             "placeholder": "Confrim new password"
         }
         return form
+
+    success_message = "Passeword Updated"
+
+    def get_success_url(self):
+        return self.request.user.get_absolute_url()

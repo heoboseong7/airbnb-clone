@@ -26,9 +26,8 @@
 }
 
 input,
-textarea,
-select {
-    @apply w-full rounded-sm py-5 font-light text-lg text-left border border-gray-600 px-5 focus:outline-none focus:border-green-500;
+textarea {
+    @apply rounded-sm py-5 font-light text-lg w-full text-left border border-gray-600 px-5 focus:outline-none focus:border-green-500;
 }
 
 textarea {
@@ -37,7 +36,8 @@ textarea {
 }
 
 select {
-    height: 30px
+    @apply rounded-sm py-1 font-light text-lg w-full text-left border border-gray-600 px-5 focus:outline-none focus:border-green-500;
+    height: 50px
 }
 
 form {
