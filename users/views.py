@@ -252,6 +252,18 @@ class UpdateProfileView(UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields["email"].widget.attrs = {"placeholder": "Email"}
+        form.fields["birthdate"].widget.attrs = {"placeholder": "Birthdate"}
+        form.fields["first_name"].widget.attrs = {"placeholder": "First Name"}
+        form.fields["last_name"].widget.attrs = {"placeholder": "Last Name"}
+        form.fields["gender"].widget.attrs = {"placeholder": "Gender"}
+        form.fields["bio"].widget.attrs = {"placeholder": "Bio"}
+        form.fields["language"].widget.attrs = {"placeholder": "Language"}
+        form.fields["currency"].widget.attrs = {"placeholder": "Currency"}
+        return form
+
     """ def form_valid(self, form):
         email = from.cleaned_data.get("email")
         self.object.username = email
@@ -262,3 +274,12 @@ class UpdateProfileView(UpdateView):
 class UpdatePasswordView(PasswordChangeView):
 
     template_name = "users/update-password.html"
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields["old_password"].widget.attrs = {"placeholder": "Current password"}
+        form.fields["new_password1"].widget.attrs = {"placeholder": "New password"}
+        form.fields["new_password2"].widget.attrs = {
+            "placeholder": "Confrim new password"
+        }
+        return form
