@@ -108,3 +108,7 @@ class Room(core_models.TimeStampedModel):
         # comma를 붙이면 해당 배열의 첫 번째 원소를 받음
         (photo,) = self.photos.all()[:1]
         return photo.file.url
+
+    def get_next_four_photos(self):
+        photos = self.photos.all()[1:5]
+        return photos
