@@ -1,6 +1,5 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
 // npm run css 를 실행하지 않으면 여기서의 변경사항이 static 폴더의 styles.css에 반영이 되지 않으므로 프론트엔드에 적용이 되지 않는다.
 // 1 em == closest font-size
@@ -95,3 +94,5 @@ form {
 .border-section {
     @apply border-b border-gray-400 pb-8 mt-8;
 }
+
+@tailwind utilities;
