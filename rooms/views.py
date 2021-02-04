@@ -205,5 +205,7 @@ class CreateRoomView(user_mixins.LoggedInOnlyView, FormView):
         room = form.save()
         room.host = self.request.user
         room.save()
+        # save_m2m은 object가 데이터베이스에 저장된 후 사용할 수 있음
+        form.save_m2m()
         messages.success(self.request, "Room Created")
         return redirect(reverse("rooms:detail", kwargs={"pk": room.pk}))
