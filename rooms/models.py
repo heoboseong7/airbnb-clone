@@ -105,9 +105,12 @@ class Room(core_models.TimeStampedModel):
         return reverse("rooms:detail", kwargs={"pk": self.pk})
 
     def first_photo(self):
-        # comma를 붙이면 해당 배열의 첫 번째 원소를 받음
-        (photo,) = self.photos.all()[:1]
-        return photo.file.url
+        try:
+            # comma를 붙이면 해당 배열의 첫 번째 원소를 받음
+            (photo,) = self.photos.all()[:1]
+            return photo.file.url
+        except ValueError:
+            return None
 
     def get_next_four_photos(self):
         photos = self.photos.all()[1:5]
